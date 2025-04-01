@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="patriot_red">#FF0000</color>
+    <color name="neon_white">#FFFFFF</color>
+    <color name="patriot_blue">#1E90FF</color>
+    <color name="neon_red">#FF3131</color>
+    <color name="neon_blue">#00BFFF</color>
+    <color name="patriot_gold">#FFD700</color>
+</resources>

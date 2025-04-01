@@ -1,0 +1,49 @@
+FREEDOM FIGHTERS APP BUILD INSTRUCTIONS
+
+To resolve remaining build issues:
+
+1. Ensure Material3 dependency is properly added in app/build.gradle:
+   ```
+   dependencies {
+       // Other dependencies...
+       implementation "androidx.compose.material3:material3:1.1.2"
+       implementation "androidx.compose.material:material-icons-extended:1.5.4"
+   }
+   ```
+
+2. Add the following import fixes in MainActivity.kt:
+   - Import missing Icon components:
+     ```kotlin
+     import androidx.compose.material.icons.Icons
+     import androidx.compose.material.icons.filled.Chat as Forum
+     import androidx.compose.material.icons.filled.Flag
+     import androidx.compose.material.icons.filled.Warning
+     ```
+
+3. The animateColor function may be missing from the current version of the animation library.
+   The simplest fix is to use a static color instead:
+   ```kotlin
+   // Instead of:
+   val backgroundColor by infiniteTransition.animateColor(...)
+   
+   // Use:
+   val backgroundColor = ComposeColors.PatriotRed
+   ```
+
+4. Make sure you have the ComposeColors class in your ui.theme package:
+   ```kotlin
+   // In ComposeColors.kt
+   object ComposeColors {
+       val PatriotRed = Color(0xFFE63946)
+       val PatriotBlue = Color(0xFF1D3557)
+       val NeonWhite = Color(0xFFF1FAEE)
+   }
+   ```
+
+5. If you need to use advanced animations, make sure you have the correct animation dependency:
+   ```
+   implementation "androidx.compose.animation:animation:1.5.4"
+   implementation "androidx.compose.animation:animation-core:1.5.4"
+   ```
+
+If you still encounter build errors, simplify the implementation further by removing complex animations and focusing on getting the basic UI working first. 

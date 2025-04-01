@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "954483151443",
+    "project_id": "freedom-fighters-cd014",
+    "storage_bucket": "freedom-fighters-cd014.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954483151443:android:a18de05e7dfad3bce86ca6",
+        "android_client_info": {
+          "package_name": "com.example.partyofthepeople"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHVrBqGEXxcmvHgj_me5vMzJCvNSbAnOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2434 @@
+package com.example.partyofthepeople
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.HapticFeedbackConstants
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.math.min
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.text.style.TextAlign
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.clickable
+import com.example.partyofthepeople.ui.components.CommentsSection
+import com.example.partyofthepeople.ui.components.AchievementNotificationHost
+import com.example.partyofthepeople.UserProfile
+import com.google.firebase.auth.AuthCredential
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import android.os.Build.VERSION.SDK_INT
+import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.partyofthepeople.AuthViewModel
+import com.example.partyofthepeople.ui.screens.ProfileScreen2
+import com.example.partyofthepeople.ui.screens.AchievementsScreen
+import com.example.partyofthepeople.ui.screens.LeaderboardScreen
+import com.example.partyofthepeople.ui.screens.BipartisanMatchScreen
+import com.example.partyofthepeople.ui.screens.ElectionHistoryScreen
+import com.example.partyofthepeople.ui.screens.ControversyRadarScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.partyofthepeople.bipartisan.BipartisanMatchManager
+import com.example.partyofthepeople.VoteRecord
+import java.util.UUID
+import kotlin.math.roundToInt
+import com.example.partyofthepeople.ui.screens.ProfileCustomizationScreen
+import androidx.navigation.compose.rememberNavController
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListItems
+import androidx.compose.foundation.lazy.rememberLazyListScope
+package com.example.partyofthepeople
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.HapticFeedbackConstants
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.math.min
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.text.style.TextAlign
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.clickable
+import com.example.partyofthepeople.ui.components.CommentsSection
+import com.example.partyofthepeople.ui.components.AchievementNotificationHost
+import com.example.partyofthepeople.UserProfile
+import com.google.firebase.auth.AuthCredential
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import android.os.Build.VERSION.SDK_INT
+import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.partyofthepeople.AuthViewModel
+import com.example.partyofthepeople.ui.screens.ProfileScreen2
+import com.example.partyofthepeople.ui.screens.AchievementsScreen
+import com.example.partyofthepeople.ui.screens.LeaderboardScreen
+import com.example.partyofthepeople.ui.screens.BipartisanMatchScreen
+import com.example.partyofthepeople.ui.screens.ElectionHistoryScreen
+import com.example.partyofthepeople.ui.screens.ControversyRadarScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.partyofthepeople.bipartisan.BipartisanMatchManager
+import com.example.partyofthepeople.VoteRecord
+import java.util.UUID
+import kotlin.math.roundToInt
+import com.example.partyofthepeople.ui.screens.ProfileCustomizationScreen
+import androidx.navigation.compose.rememberNavController
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+package com.example.partyofthepeople
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.HapticFeedbackConstants
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.math.min
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.text.style.TextAlign
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.clickable
+import com.example.partyofthepeople.ui.components.CommentsSection
+import com.example.partyofthepeople.ui.components.AchievementNotificationHost
+import com.example.partyofthepeople.UserProfile
+import com.google.firebase.auth.AuthCredential
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import android.os.Build.VERSION.SDK_INT
+import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.partyofthepeople.AuthViewModel
+import com.example.partyofthepeople.ui.screens.ProfileScreen2
+import com.example.partyofthepeople.ui.screens.AchievementsScreen
+import com.example.partyofthepeople.ui.screens.LeaderboardScreen
+import com.example.partyofthepeople.ui.screens.BipartisanMatchScreen
+import com.example.partyofthepeople.ui.screens.ElectionHistoryScreen
+import com.example.partyofthepeople.ui.screens.ControversyRadarScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.partyofthepeople.bipartisan.BipartisanMatchManager
+import com.example.partyofthepeople.VoteRecord
+import java.util.UUID
+import kotlin.math.roundToInt
+import com.example.partyofthepeople.ui.screens.ProfileCustomizationScreen
+import androidx.navigation.compose.rememberNavController
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+package com.example.partyofthepeople
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.HapticFeedbackConstants
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.math.min
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.text.style.TextAlign
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.clickable
+import com.example.partyofthepeople.ui.components.CommentsSection
+import com.example.partyofthepeople.ui.components.AchievementNotificationHost
+import com.example.partyofthepeople.UserProfile
+import com.google.firebase.auth.AuthCredential
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import android.os.Build.VERSION.SDK_INT
+import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.partyofthepeople.AuthViewModel
+import com.example.partyofthepeople.ui.screens.ProfileScreen2
+import com.example.partyofthepeople.ui.screens.AchievementsScreen
+import com.example.partyofthepeople.ui.screens.LeaderboardScreen
+import com.example.partyofthepeople.ui.screens.BipartisanMatchScreen
+import com.example.partyofthepeople.ui.screens.ElectionHistoryScreen
+import com.example.partyofthepeople.ui.screens.ControversyRadarScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.compose.foundation.shape.RoundedCornerShape
+import com.example.partyofthepeople.bipartisan.BipartisanMatchManager
+import com.example.partyofthepeople.VoteRecord
+import java.util.UUID
+import kotlin.math.roundToInt
+import com.example.partyofthepeople.ui.screens.ProfileCustomizationScreen
+import androidx.navigation.compose.rememberNavController
+import androidx.activity.compose.BackHandler
+
+val mockStateStats = mapOf(
+    "ALASKA" to StateStats(
+        freedomFighters = 1776,
+        activeProposals = 42,
+        lawsPassed = 13
+    )
+)
+
+@Composable
+fun PlayerAvatar() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "YOUR FREEDOM FIGHTER",
+            color = Color(0xFFFFD700),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Surface(
+            modifier = Modifier
+                .size(120.dp)
+                .padding(8.dp),
+            shape = CircleShape,
+            color = Color(0xFF457B9D)
+        ) {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    "🦅",
+                    fontSize = 48.sp
+                )
+            }
+        }
+
+        Text(
+            text = "Tap to customize",
+            color = Color(0xFFFFD700),
+            fontSize = 16.sp,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+    }
+}
+
+@Composable
+fun SwipeableVoteCard(
+    proposal: String,
+    onVote: (Boolean) -> Unit,
+    viewModel: MainViewModel = viewModel(),
+    authViewModel: AuthViewModel = viewModel()
+) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val view = LocalView.current
+    
+    var offsetX by remember { mutableFloatStateOf(0f) }
+    var offsetY by remember { mutableFloatStateOf(0f) }
+    val scale by remember {
+        derivedStateOf {
+            1f - min(abs(offsetX), 300f) / 2000f
+        }
+    }
+    val rotation by remember {
+        derivedStateOf {
+            offsetX / 20
+        }
+    }
+
+    val backgroundColor by remember {
+        derivedStateOf {
+            when {
+                offsetX > 100 -> Color(0xFF4CAF50).copy(alpha = (offsetX / 500f).coerceIn(0f, 0.3f))
+                offsetX < -100 -> Color(0xFFE63946).copy(alpha = (-offsetX / 500f).coerceIn(0f, 0.3f))
+                else -> Color.Transparent
+            }
+        }
+    }
+
+    LaunchedEffect(offsetX) {
+        if (abs(offsetX) > 100) {
+            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+        }
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable {
+                viewModel.navigateToVoteScreen(proposal)
+            }
+            .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .rotate(rotation)
+            .background(backgroundColor)
+            .pointerInput(Unit) {
+                detectDragGestures(
+                    onDragEnd = {
+                        if (offsetX > 200) {
+                            onVote(true)
+                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                            
+                            // Record the vote and check for achievements
+                            authViewModel.userProfile.value?.let { profile ->
+                                scope.launch {
+                                    val userId = Firebase.auth.currentUser?.uid ?: return@launch
+                                    
+                                    // Record vote with achievement manager
+                                    val achievementManager = com.example.partyofthepeople.achievements.AchievementManager()
+                                    val newAchievements = achievementManager.recordVote(userId, profile, true)
+                                    
+                                    // Add any new achievements to the notification queue
+                                    newAchievements.forEach { achievement ->
+                                        viewModel.addPendingAchievement(achievement)
+                                    }
+                                    
+                                    // Create vote record for bipartisan matching with a variety of categories
+                                    val categories = listOf("General", "Economy", "Foreign Policy", "Healthcare", "Defense", "Environment", "Education")
+                                    val category = categories[Math.abs(proposal.hashCode()) % categories.size]
+                                    
+                                    val voteRecord = VoteRecord(
+                                        proposalId = UUID.randomUUID().toString(),
+                                        proposalTitle = proposal,
+                                        supported = true,
+                                        category = category
+                                    )
+                                    
+                                    // Record in bipartisan system
+                                    val bipartisanManager = BipartisanMatchManager()
+                                    bipartisanManager.recordVote(userId, voteRecord)
+                                }
+                            }
+                        } else if (offsetX < -200) {
+                            onVote(false)
+                            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                            
+                            // Record the vote and check for achievements
+                            authViewModel.userProfile.value?.let { profile ->
+                                scope.launch {
+                                    val userId = Firebase.auth.currentUser?.uid ?: return@launch
+                                    
+                                    // Record vote with achievement manager
+                                    val achievementManager = com.example.partyofthepeople.achievements.AchievementManager()
+                                    val newAchievements = achievementManager.recordVote(userId, profile, false)
+                                    
+                                    // Add any new achievements to the notification queue
+                                    newAchievements.forEach { achievement ->
+                                        viewModel.addPendingAchievement(achievement)
+                                    }
+                                    
+                                    // Create vote record for bipartisan matching with a variety of categories
+                                    val categories = listOf("General", "Economy", "Foreign Policy", "Healthcare", "Defense", "Environment", "Education")
+                                    val category = categories[Math.abs(proposal.hashCode()) % categories.size]
+                                    
+                                    val voteRecord = VoteRecord(
+                                        proposalId = UUID.randomUUID().toString(),
+                                        proposalTitle = proposal,
+                                        supported = false,
+                                        category = category
+                                    )
+                                    
+                                    // Record in bipartisan system
+                                    val bipartisanManager = BipartisanMatchManager()
+                                    bipartisanManager.recordVote(userId, voteRecord)
+                                }
+                            }
+                        }
+                        offsetX = 0f
+                        offsetY = 0f
+                    },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        offsetX += dragAmount.x
+                        offsetY += dragAmount.y
+                    }
+                )
+            },
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp,
+            pressedElevation = 2.dp
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        ) {
+            Text(
+                text = proposal,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "← Swipe Left to Oppose",
+                    color = Color(0xFFE63946),
+                    fontSize = 14.sp
+                )
+                Text(
+                    "Swipe Right to Support →",
+                    color = Color(0xFF4CAF50),
+                    fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun VoteStack() {
+    val proposals = remember {
+        listOf(
+            "MANDATORY PIZZA FRIDAYS: All citizens must consume at least one slice of pizza every Friday (Tax-deductible) 🍕",
+            "THE MEME AMENDMENT: All political debates must include at least 3 relevant memes per argument 😎",
+            "NATIONAL HIGH FIVE DAY: Monthly mandatory celebration of unity through high fives ✋",
+            "ANTI-BORING LAW: All government buildings must be painted in minimum 3 neon colors 🎨"
+        )
+    }
+
+    var currentProposalIndex by rememberSaveable { mutableIntStateOf(0) }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (currentProposalIndex < proposals.size) {
+            SwipeableVoteCard(
+                proposal = proposals[currentProposalIndex],
+                onVote = { supported ->
+                    currentProposalIndex++
+                }
+            )
+        } else {
+            Text(
+                "No more proposals to vote on!",
+                color = Color.White,
+                fontSize = 18.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun TopBar(freedomBucks: Int) {
+    Surface(
+        color = Color(0xFFE63946),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "FREEDOM FIGHTERS",
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Freedom Bucks",
+                    tint = Color(0xFFFFD700)
+                )
+                Text(
+                    text = "$freedomBucks FB",
+                    color = Color(0xFFFFD700),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ProgressTracker() {
+    val completedFeatures = 6
+    val totalFeatures = 25
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Freedom Fighters Development Progress",
+            color = Color.White,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LinearProgressIndicator(
+            progress = { completedFeatures.toFloat() / totalFeatures },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(8.dp),
+            color = Color(0xFFE63946),
+            trackColor = Color(0xFF457B9D)
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = "Completed: $completedFeatures/$totalFeatures features",
+            color = Color(0xFFFFD700),
+            fontSize = 14.sp
+        )
+    }
+}
+
+@Composable
+fun LawNewsTicker() {
+    var currentIndex by rememberSaveable { mutableIntStateOf(0) }
+    val recentLaws = remember {
+        listOf(
+            "🗽 New York: Bill to improve public transportation",
+            "🦅 National: Balanced Budget Amendment proposed",
+            "🗽 Texas: Energy Grid Independence Act",
+            "🦅 National: Term Limits for Congress",
+            "🗽 Florida: Coastal Protection Bill",
+            "🦅 National: Tax Simplification Act"
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(3000)
+            currentIndex = (currentIndex + 1) % recentLaws.size
+        }
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D))
+    ) {
+        Text(
+            text = recentLaws[currentIndex],
+            modifier = Modifier.padding(8.dp),
+            color = Color.White,
+            fontSize = 16.sp
+        )
+    }
+}
+
+@Composable
+fun DebateScreen(onBackClick: () -> Unit, viewModel: MainViewModel = viewModel()) {
+    var showSubmitProposalDialog by remember { mutableStateOf(false) }
+    var activeTab by remember { mutableStateOf(0) }
+    val tabs = listOf("National", "State", "District")
+    
+    var selectedSort by remember { mutableStateOf("Recent") }
+    val sortOptions = listOf("Recent", "Popular", "Controversial")
+    var showSortMenu by remember { mutableStateOf(false) }
+
+    val mockProposals = remember {
+        listOf(
+            "Should we ban pineapple on pizza?",
+            "Should the national animal be changed to a bald eagle wearing sunglasses?",
+            "Should we make voting mandatory for all citizens?",
+            "Should we adopt a 4-day work week nationally?",
+            "Is the penny worth keeping in circulation?",
+            "Should all public transportation be free?",
+            "Should Election Day be a national holiday?",
+            "Should we abolish Daylight Saving Time?",
+            "Should college athletes be paid?",
+            "Should AI development be more regulated?"
+        )
+    }
+    
+    if (showSubmitProposalDialog) {
+        ProposalSubmissionDialog(
+            onDismiss = { showSubmitProposalDialog = false },
+            onSubmit = { title, description, isNational ->
+                // TODO: Submit proposal to backend
+                showSubmitProposalDialog = false
+            }
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(0xFF1D3557))
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "🎤 DEBATE HALL",
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Submit Proposal Card
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D))
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Submit Law Proposal",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = { showSubmitProposalDialog = true },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("PROPOSE A NEW LAW 📜")
+                }
+            }
+        }
+        
+        // Tab Row for proposal types
+        TabRow(selectedTabIndex = activeTab) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = activeTab == index,
+                    onClick = { activeTab = index },
+                    text = { Text(title) }
+                )
+            }
+        }
+        
+        // Sort and filter options
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text("Active Proposals", color = Color(0xFFFFD700), fontWeight = FontWeight.Bold)
+            
+            Box {
+                Button(
+                    onClick = { showSortMenu = true },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF457B9D))
+                ) {
+                    Text("Sort: $selectedSort")
+                    Icon(
+                        Icons.Default.ArrowDropDown,
+                        contentDescription = "Sort options"
+                    )
+                }
+                
+                DropdownMenu(
+                    expanded = showSortMenu,
+                    onDismissRequest = { showSortMenu = false }
+                ) {
+                    sortOptions.forEach { option ->
+                        DropdownMenuItem(
+                            text = { Text(option) },
+                            onClick = {
+                                selectedSort = option
+                                showSortMenu = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        // Proposal listing
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            items(mockProposals) { proposal ->
+                ProposalCard(
+                    proposal = proposal,
+                    onClick = { viewModel.navigateToVoteScreen(proposal) }
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = onBackClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("BACK TO HEADQUARTERS 🦅")
+        }
+    }
+}
+
+@Composable
+fun ProposalCard(
+    proposal: String,
+    onClick: () -> Unit
+) {
+    val yesPercentage = remember { (30..70).random() }
+    val engagementLevel = remember { (100..10000).random() }
+    val commentsCount = remember { (5..100).random() }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF2A4A73))
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = proposal,
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Yes: $yesPercentage%",
+                    color = if (yesPercentage > 50) Color(0xFF4CAF50) else Color(0xFFE63946)
+                )
+                
+                Text(
+                    text = "Votes: $engagementLevel",
+                    color = Color.LightGray
+                )
+            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Comments",
+                        tint = Color(0xFFFFD700),
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "$commentsCount comments",
+                        color = Color.LightGray,
+                        fontSize = 12.sp
+                    )
+                }
+                
+                Text(
+                    text = "Tap to vote & discuss",
+                    color = Color(0xFFFFD700),
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProposalSubmissionDialog(
+    onDismiss: () -> Unit,
+    onSubmit: (title: String, description: String, isNational: Boolean) -> Unit
+) {
+    var title by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var isNational by remember { mutableStateOf(true) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Submit New Law Proposal") },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = title,
+                    onValueChange = { title = it },
+                    label = { Text("Title") },
+                    placeholder = { Text("E.g. Ban pineapple on pizza") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                OutlinedTextField(
+                    value = description,
+                    onValueChange = { description = it },
+                    label = { Text("Description") },
+                    placeholder = { Text("Explain your proposal...") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp),
+                    maxLines = 5
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(
+                        selected = isNational,
+                        onClick = { isNational = true }
+                    )
+                    Text("National")
+                    
+                    Spacer(modifier = Modifier.width(16.dp))
+                    
+                    RadioButton(
+                        selected = !isNational,
+                        onClick = { isNational = false }
+                    )
+                    Text("State/District")
+                }
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    "Note: All proposals are reviewed for appropriateness before being published.",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = { onSubmit(title, description, isNational) },
+                enabled = title.isNotBlank() && description.isNotBlank()
+            ) {
+                Text("Submit")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+fun StateButton(
+    state: String,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        modifier = Modifier.padding(4.dp)
+    ) {
+        Text(
+            text = state,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun StateDetailsDialog(
+    state: String,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(state, color = Color(0xFFFFD700)) },
+        text = {
+            Column {
+                Text("Freedom Fighters: 150", color = Color.White)
+                Text("Active Proposals: 3", color = Color.White)
+                Text("Laws Passed: 12", color = Color.White)
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946))
+            ) {
+                Text("CLOSE")
+            }
+        },
+        containerColor = Color(0xFF1D3557)
+    )
+}
+
+@Composable
+fun RegionCard(
+    title: String,
+    states: List<Pair<String, Color>>
+) {
+    var selectedState by remember { mutableStateOf<String?>(null) }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = title,
+                color = Color(0xFFFFD700),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 100.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.heightIn(max = 200.dp)
+            ) {
+                items(states) { (state, color) ->
+                    StateButton(
+                        state = state,
+                        color = color,
+                        onClick = { selectedState = state }
+                    )
+                }
+            }
+        }
+    }
+
+    selectedState?.let { state ->
+        StateDetailsDialog(
+            state = state,
+            onDismiss = { selectedState = null }
+        )
+    }
+}
+
+@Composable
+fun BattlegroundScreen(onBackClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = Color(0xFF1D3557))
+            .padding(bottom = 80.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "BATTLEGROUND MAP 🦅",
+            color = Color(0xFFFFD700),
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            RegionCard(
+                title = "Northeast",
+                states = listOf(
+                    "MAINE" to Color(0xFF457B9D),
+                    "NEW HAMPSHIRE" to Color(0xFF457B9D),
+                    "VERMONT" to Color(0xFF457B9D),
+                    "MASSACHUSETTS" to Color(0xFF457B9D),
+                    "RHODE ISLAND" to Color(0xFF457B9D),
+                    "CONNECTICUT" to Color(0xFF457B9D),
+                    "NEW YORK" to Color(0xFFE63946),
+                    "NEW JERSEY" to Color(0xFF457B9D),
+                    "PENNSYLVANIA" to Color(0xFFE63946)
+                )
+            )
+
+            RegionCard(
+                title = "Southeast",
+                states = listOf(
+                    "FLORIDA" to Color(0xFFE63946),
+                    "GEORGIA" to Color(0xFF457B9D),
+                    "ALABAMA" to Color(0xFF457B9D),
+                    "MISSISSIPPI" to Color(0xFF457B9D),
+                    "SOUTH CAROLINA" to Color(0xFF457B9D),
+                    "NORTH CAROLINA" to Color(0xFF457B9D),
+                    "VIRGINIA" to Color(0xFF457B9D),
+                    "WEST VIRGINIA" to Color(0xFF457B9D),
+                    "KENTUCKY" to Color(0xFF457B9D),
+                    "TENNESSEE" to Color(0xFF457B9D)
+                )
+            )
+
+            RegionCard(
+                title = "Midwest",
+                states = listOf(
+                    "OHIO" to Color(0xFF457B9D),
+                    "INDIANA" to Color(0xFF457B9D),
+                    "ILLINOIS" to Color(0xFFE63946),
+                    "MICHIGAN" to Color(0xFF457B9D),
+                    "WISCONSIN" to Color(0xFF457B9D),
+                    "MINNESOTA" to Color(0xFF457B9D),
+                    "IOWA" to Color(0xFF457B9D),
+                    "MISSOURI" to Color(0xFF457B9D),
+                    "NORTH DAKOTA" to Color(0xFF457B9D),
+                    "SOUTH DAKOTA" to Color(0xFF457B9D),
+                    "NEBRASKA" to Color(0xFF457B9D),
+                    "KANSAS" to Color(0xFF457B9D)
+                )
+            )
+
+            RegionCard(
+                title = "Southwest",
+                states = listOf(
+                    "TEXAS" to Color(0xFFE63946),
+                    "OKLAHOMA" to Color(0xFF457B9D),
+                    "NEW MEXICO" to Color(0xFF457B9D),
+                    "ARIZONA" to Color(0xFF457B9D),
+                    "ARKANSAS" to Color(0xFF457B9D),
+                    "LOUISIANA" to Color(0xFF457B9D)
+                )
+            )
+
+            RegionCard(
+                title = "West",
+                states = listOf(
+                    "CALIFORNIA" to Color(0xFFE63946),
+                    "OREGON" to Color(0xFF457B9D),
+                    "WASHINGTON" to Color(0xFF457B9D),
+                    "IDAHO" to Color(0xFF457B9D),
+                    "MONTANA" to Color(0xFF457B9D),
+                    "WYOMING" to Color(0xFF457B9D),
+                    "NEVADA" to Color(0xFF457B9D),
+                    "UTAH" to Color(0xFF457B9D),
+                    "COLORADO" to Color(0xFF457B9D),
+                    "ALASKA" to Color(0xFF457B9D),
+                    "HAWAII" to Color(0xFF457B9D)
+                )
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = onBackClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946)),
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text("BACK TO HEADQUARTERS 🦅")
+        }
+    }
+}
+
+@Composable
+fun MainScreen(
+    onBattlegroundClick: () -> Unit,
+    onDebateClick: () -> Unit,
+    onMissionClick: () -> Unit,
+    onProfileClick: () -> Unit,
+    onLeaderboardClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "DEMOCRATIC BATTLEGROUND",
+            color = Color(0xFFFFD700),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+        
+        // Main buttons
+        HeroActionButton(
+            text = "DEBATE LAWS",
+            onClick = onDebateClick,
+            backgroundColor = Color(0xFF457B9D)
+        )
+        
+        HeroActionButton(
+            text = "ENTER BATTLEGROUND",
+            onClick = onBattlegroundClick,
+            backgroundColor = Color(0xFFE63946)
+        )
+        
+        HeroActionButton(
+            text = "PATRIOT MISSIONS",
+            onClick = onMissionClick,
+            backgroundColor = Color(0xFF1D3557)
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        // Bottom buttons in a row
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            ActionButton(
+                text = "PROFILE",
+                onClick = onProfileClick,
+                modifier = Modifier.weight(1f)
+            )
+            
+            ActionButton(
+                text = "LEADERBOARD",
+                onClick = onLeaderboardClick,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+        
+        StateStatsDisplay()
+    }
+}
+
+@Composable
+fun SplashScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF1D3557)),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "FREEDOM FIGHTERS",
+                color = Color(0xFFFFD700),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
+
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(R.drawable.america)
+                    .decoderFactory(if (SDK_INT >= 28) ImageDecoderDecoder.Factory() else GifDecoder.Factory())
+                    .build(),
+                contentDescription = "Patriotic Animation",
+                modifier = Modifier.size(300.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun ProfileScreen(
+    onBackClick: () -> Unit,
+    profile: UserProfile,
+    onAuditClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(Color(0xFF1D3557))
+            .padding(16.dp)
+    ) {
+        // Profile Header
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Avatar
+                Surface(
+                    shape = CircleShape,
+                    color = Color(0xFF1D3557),
+                    modifier = Modifier.size(120.dp)
+                ) {
+                    Text(
+                        text = "🦅",
+                        fontSize = 64.sp,
+                        modifier = Modifier.padding(16.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Username and Rank
+                Text(
+                    text = profile.username,
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = profile.politicalRank,
+                    color = Color(0xFFFFD700),
+                    fontSize = 18.sp
+                )
+
+                // District
+                Text(
+                    text = "District: ${profile.district}",
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Stats Card
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "PATRIOT STATS",
+                    color = Color(0xFFFFD700),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Votes Cast: ${profile.stats.votesCast}", color = Color.White)
+                Text("Laws Passed: ${profile.stats.lawsPassed}", color = Color.White)
+                Text("Streak Days: ${profile.stats.streakDays}", color = Color.White)
+                Text("Freedom Bucks: ${profile.freedomBucks}", color = Color.White)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Badges
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "BADGES OF HONOR",
+                    color = Color(0xFFFFD700),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    modifier = Modifier.heightIn(max = 200.dp)
+                ) {
+                    items(profile.badges) { badge ->
+                        Card(
+                            modifier = Modifier.padding(4.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF1D3557))
+                        ) {
+                            Text(
+                                text = badge,
+                                color = Color.White,
+                                modifier = Modifier.padding(8.dp),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // IRS Audit Button (with animation)
+        Button(
+            onClick = onAuditClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("TRIGGER IRS AUDIT 💸")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = onBackClick,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("BACK TO HEADQUARTERS 🦅")
+        }
+    }
+}
+
+@Composable
+fun LoginScreen(
+    onGuestLogin: () -> Unit,
+    onGoogleLogin: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF1D3557))
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "WELCOME PATRIOT! 🦅",
+            color = Color(0xFFFFD700),
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(
+            onClick = onGoogleLogin,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4285F4))
+        ) {
+            Text("SIGN IN WITH GOOGLE")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = onGuestLogin,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946))
+        ) {
+            Text("CONTINUE AS GUEST")
+        }
+    }
+}
+
+class MainActivity : ComponentActivity() {
+    private val googleSignInClient by lazy {
+        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        GoogleSignIn.getClient(this, googleSignInOptions)
+    }
+
+    private val authViewModel: AuthViewModel by viewModels()
+    
+    // Define the ActivityResultLauncher for Google Sign-In
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            Log.d("MainActivity", "Received Google Sign In result")
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                Log.d("MainActivity", "Google sign in succeeded: ${account.email}")
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                authViewModel.signInWithGoogle(credential)
+            } catch (e: ApiException) {
+                Log.e("MainActivity", "Google sign in failed", e)
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Log.d("MainActivity", "onCreate called")
+
+        setContent {
+            MaterialTheme {
+                var currentScreen by remember { mutableStateOf("splash") }
+                val userProfile by authViewModel.userProfile.collectAsStateWithLifecycle(initialValue = null)
+                val mainViewModel = viewModel<MainViewModel>()
+
+                // Check for achievements when user profile changes
+                LaunchedEffect(userProfile) {
+                    userProfile?.let { profile ->
+                        Log.d("MainActivity", "UserProfile state changed: ${profile.username}")
+                        
+                        // Check if there's a latest achievement to show
+                        profile.latestAchievement?.let { achievement ->
+                            // Only show if earned in the last 60 seconds
+                            val currentTime = System.currentTimeMillis()
+                            val achievementTime = achievement.dateEarned
+                            if (currentTime - achievementTime < 60000) {
+                                mainViewModel.addPendingAchievement(achievement)
+                            }
+                        }
+                    }
+                }
+
+                LaunchedEffect(currentScreen) {
+                    Log.d("MainActivity", "Current screen changed to: $currentScreen")
+                }
+
+                // Initial splash screen delay
+                LaunchedEffect(Unit) {
+                    try {
+                        Log.d("MainActivity", "Starting splash screen delay")
+                        delay(3000)
+                        currentScreen = if (userProfile == null) {
+                            Log.d("MainActivity", "No user profile, showing login")
+                            "login"
+                        } else {
+                            Log.d("MainActivity", "User profile exists, showing main")
+                            "main"
+                        }
+                    } catch (e: Exception) {
+                        Log.e("MainActivity", "Error in splash screen delay", e)
+                        currentScreen = "login"
+                    }
+                }
+
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color(0xFF1D3557)
+                ) {
+                    when (currentScreen) {
+                        "splash" -> SplashScreen()
+                        "login" -> LoginScreen(
+                            onGuestLogin = {
+                                Log.d("MainActivity", "Guest login clicked")
+                                authViewModel.signInAnonymously()
+                            },
+                            onGoogleLogin = {
+                                Log.d("MainActivity", "Google login clicked")
+                                startGoogleSignIn()
+                            }
+                        )
+                        "main" -> MainContent(
+                            userProfile = userProfile,
+                            onLogout = {
+                                Log.d("MainActivity", "Logout clicked")
+                                Firebase.auth.signOut()
+                                googleSignInClient.signOut()
+                                currentScreen = "login"
+                            }
+                        )
+                    }
+                }
+
+                // Observer for authentication state
+                LaunchedEffect(userProfile) {
+                    if (userProfile != null && currentScreen != "main") {
+                        Log.d("MainActivity", "Authenticated, switching to main screen")
+                        currentScreen = "main"
+                    }
+                }
+            }
+        }
+    }
+
+    private fun startGoogleSignIn() {
+        Log.d("MainActivity", "Starting Google Sign In flow")
+        val signInIntent = googleSignInClient.signInIntent
+        googleSignInLauncher.launch(signInIntent)
+    }
+}
+
+class MainViewModel : ViewModel() {
+    private val _currentScreen = mutableStateOf("main")
+    val currentScreen: State<String> = _currentScreen
+
+    private val _currentProposal = mutableStateOf<String?>(null)
+    val currentProposal: State<String?> = _currentProposal
+    
+    // Achievement notification system
+    private val _pendingAchievements = mutableStateListOf<Achievement>()
+    val pendingAchievements: List<Achievement> = _pendingAchievements
+    
+    fun navigateToScreen(screen: String) {
+        _currentScreen.value = screen
+    }
+
+    fun navigateToVoteScreen(proposal: String) {
+        _currentScreen.value = "vote_detail"
+        _currentProposal.value = proposal
+    }
+    
+    fun navigateToAchievementsScreen() {
+        _currentScreen.value = "achievements"
+    }
+    
+    fun navigateToLeaderboardScreen() {
+        _currentScreen.value = "leaderboard"
+    }
+
+    fun navigateToBipartisanMatchScreen() {
+        _currentScreen.value = "bipartisan_match"
+    }
+
+    fun navigateToElectionHistoryScreen() {
+        _currentScreen.value = "election_history"
+    }
+
+    fun navigateToControversyRadarScreen() {
+        _currentScreen.value = "controversy_radar"
+    }
+
+    fun navigateToProfileCustomizationScreen() {
+        _currentScreen.value = "profile_customization"
+    }
+    
+    fun navigateToTitleScreen() {
+        _currentScreen.value = "title_screen"
+    }
+
+    fun navigateBack() {
+        _currentScreen.value = "main"
+    }
+    
+    fun addPendingAchievement(achievement: Achievement) {
+        _pendingAchievements.add(achievement)
+    }
+    
+    fun removePendingAchievement(achievement: Achievement) {
+        _pendingAchievements.remove(achievement)
+    }
+}
+
+@Composable
+fun MainContent(
+    userProfile: UserProfile?,
+    onLogout: () -> Unit,
+    viewModel: MainViewModel = viewModel()
+) {
+    val currentScreen by viewModel.currentScreen
+    val currentProposal by viewModel.currentProposal
+    var freedomBucks by remember { mutableIntStateOf(userProfile?.freedomBucks ?: 1776) }
+    val pendingAchievements = viewModel.pendingAchievements
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column {
+            TopBar(freedomBucks = freedomBucks)
+            ProgressTracker()
+
+            when (currentScreen) {
+                "main" -> MainScreen(
+                    onBattlegroundClick = { viewModel.navigateToScreen("battleground") },
+                    onDebateClick = { viewModel.navigateToScreen("debate") },
+                    onMissionClick = { viewModel.navigateToScreen("missions") },
+                    onProfileClick = { viewModel.navigateToScreen("profile") },
+                    onLeaderboardClick = { viewModel.navigateToLeaderboardScreen() }
+                )
+                "debate" -> DebateScreen(
+                    onBackClick = { viewModel.navigateBack() }
+                )
+                "battleground" -> BattlegroundScreen(
+                    onBackClick = { viewModel.navigateBack() }
+                )
+                "vote_detail" -> currentProposal?.let { proposal ->
+                    VoteDetailScreen(proposal = proposal, viewModel = viewModel)
+                }
+                "profile" -> {
+                    userProfile?.let { profile ->
+                        ProfileScreen2(
+                            profile = profile,
+                            onBackClick = { viewModel.navigateBack() },
+                            onViewAllAchievements = { viewModel.navigateToAchievementsScreen() },
+                            onViewBipartisanMatch = { viewModel.navigateToBipartisanMatchScreen() },
+                            onViewElectionHistory = { viewModel.navigateToElectionHistoryScreen() },
+                            onViewControversyRadar = { viewModel.navigateToControversyRadarScreen() },
+                            onCustomizeProfile = { viewModel.navigateToProfileCustomizationScreen() },
+                            onManageTitles = { viewModel.navigateToTitleScreen() }
+                        )
+                    }
+                }
+                "achievements" -> {
+                    userProfile?.let { profile ->
+                        AchievementsScreen(
+                            achievements = profile.achievements,
+                            onBackClick = { viewModel.navigateToScreen("profile") }
+                        )
+                    }
+                }
+                "leaderboard" -> {
+                    LeaderboardScreen(
+                        onBackClick = { viewModel.navigateBack() }
+                    )
+                }
+                "bipartisan_match" -> {
+                    userProfile?.let { profile ->
+                        BipartisanMatchScreen(
+                            userProfile = profile,
+                            onBackClick = { viewModel.navigateToScreen("profile") }
+                        )
+                    }
+                }
+                "election_history" -> {
+                    userProfile?.let { profile ->
+                        ElectionHistoryScreen(
+                            userProfile = profile,
+                            onBackClick = { viewModel.navigateToScreen("profile") }
+                        )
+                    }
+                }
+                "controversy_radar" -> {
+                    userProfile?.let { profile ->
+                        ControversyRadarScreen(
+                            userProfile = profile,
+                            onBackClick = { viewModel.navigateToScreen("profile") }
+                        )
+                    }
+                }
+                "profile_customization" -> {
+                    userProfile?.let { profile ->
+                        ProfileCustomizationScreen(
+                            userProfile = profile,
+                            onBackClick = { viewModel.navigateToScreen("profile") }
+                        )
+                    }
+                }
+                "title_screen" -> {
+                    userProfile?.let { profile ->
+                        val customNavController = androidx.navigation.compose.rememberNavController()
+                        
+                        // Create a custom back handler
+                        val onBackClick = {
+                            viewModel.navigateToScreen("profile")
+                        }
+                        
+                        // BackHandler to override the default behavior
+                        BackHandler {
+                            onBackClick()
+                        }
+                        
+                        com.example.partyofthepeople.profile.TitleScreen(
+                            navController = customNavController,
+                            userProfile = profile,
+                            onBackClick = onBackClick
+                        )
+                    }
+                }
+                else -> Text("Coming Soon!", color = Color.White)
+            }
+        }
+        
+        // Show achievement notifications (if any)
+        if (pendingAchievements.isNotEmpty()) {
+            AchievementNotificationHost(
+                achievements = pendingAchievements,
+                onAchievementDismissed = { achievement ->
+                    viewModel.removePendingAchievement(achievement)
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun VoteDetailScreen(proposal: String, viewModel: MainViewModel = viewModel()) {
+    var hasVoted by remember { mutableStateOf(false) }
+    var userVote by remember { mutableStateOf<Boolean?>(null) }
+    var selectedTab by remember { mutableStateOf(0) }
+    val tabs = listOf("Discussion", "Details", "Stats")
+    
+    // Mock data
+    val yesVotes = remember { (100..5000).random() }
+    val noVotes = remember { (100..5000).random() }
+    val totalVotes = yesVotes + noVotes
+    val yesPercentage = (yesVotes.toFloat() / totalVotes * 100).toInt()
+    
+    // Focus on comment section after clicking Sound Off button
+    var focusOnComments by remember { mutableStateOf(false) }
+    
+    // Create a stable postId for this proposal
+    val postId = remember { proposal.hashCode().toString() }
+    
+    // After voting, automatically trigger sample comments for discussion
+    LaunchedEffect(hasVoted) {
+        if (hasVoted) {
+            // Small delay before showing comments to simulate server interaction
+            delay(500)
+            focusOnComments = true
+        }
+    }
+    
+    LaunchedEffect(focusOnComments) {
+        if (focusOnComments) {
+            selectedTab = 0 // Switch to Discussion tab
+        }
+    }
+    
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF1D3557))
+            .padding(16.dp)
+    ) {
+        // Header with back button
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { viewModel.navigateBack() }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
+            }
+            
+            Text(
+                text = "Law Proposal",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        // Proposal Card
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF2A4A73)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = proposal,
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // Vote Progress Bar
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Yes: $yesPercentage%", color = Color(0xFF4CAF50))
+                        Text("No: ${100 - yesPercentage}%", color = Color(0xFFE63946))
+                    }
+                    
+                    Spacer(modifier = Modifier.height(4.dp))
+                    
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(12.dp)
+                            .clip(RoundedCornerShape(6.dp))
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .weight(yesPercentage.toFloat())
+                                .height(12.dp)
+                                .background(Color(0xFF4CAF50))
+                        )
+                        Box(
+                            modifier = Modifier
+                                .weight((100 - yesPercentage).toFloat())
+                                .height(12.dp)
+                                .background(Color(0xFFE63946))
+                        )
+                    }
+                    
+                    Spacer(modifier = Modifier.height(4.dp))
+                    
+                    Text(
+                        text = "Total votes: $totalVotes",
+                        color = Color.LightGray,
+                        fontSize = 12.sp
+                    )
+                }
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                // Voting Buttons
+                if (!hasVoted) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Button(
+                            onClick = { 
+                                hasVoted = true
+                                userVote = true
+                                // Record vote logic would go here
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text("SUPPORT ✅")
+                        }
+                        
+                        Spacer(modifier = Modifier.width(16.dp))
+                        
+                        Button(
+                            onClick = { 
+                                hasVoted = true
+                                userVote = false
+                                // Record vote logic would go here
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946)),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text("OPPOSE ❌")
+                        }
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Card(
+                            colors = CardDefaults.cardColors(
+                                containerColor = if (userVote == true) Color(0xFF4CAF50).copy(alpha = 0.2f)
+                                                else Color(0xFFE63946).copy(alpha = 0.2f)
+                            )
+                        ) {
+                            Text(
+                                text = if (userVote == true) "You supported this proposal ✅" 
+                                        else "You opposed this proposal ❌",
+                                modifier = Modifier.padding(16.dp),
+                                color = if (userVote == true) Color(0xFF4CAF50) else Color(0xFFE63946),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        
+                        // After voting, show the SoundOffButton to encourage comments
+                        com.example.partyofthepeople.ui.components.SoundOffButton(
+                            onClick = { focusOnComments = true },
+                            isAfterVote = true
+                        )
+                    }
+                }
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        // Tabs
+        TabRow(selectedTabIndex = selectedTab) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTab == index,
+                    onClick = { selectedTab = index },
+                    text = { Text(title) }
+                )
+            }
+        }
+        
+        when (selectedTab) {
+            0 -> {
+                // Discussion tab
+                Text(
+                    text = "Discussion",
+                    color = Color(0xFFFFD700),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(Color(0xFF0A1929).copy(alpha = 0.5f))
+                        .clip(RoundedCornerShape(8.dp))
+                ) {
+                    // Use CommentSection with the consistent postId
+                    CommentsSection(postId = postId)
+                }
+            }
+            1 -> {
+                // Details tab
+                Text(
+                    text = "Proposal Details",
+                    color = Color(0xFFFFD700),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0A1929).copy(alpha = 0.5f)),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        DetailRow("Sponsor", "Patriot #12345")
+                        DetailRow("Submitted", "3 days ago")
+                        DetailRow("Category", "General")
+                        DetailRow("Status", "Open for voting")
+                        DetailRow("Closes", "In 4 days")
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Text(
+                            text = "Full Description:",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                        
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        Text(
+                            text = "This is a detailed explanation of the proposal that outlines the reasoning behind it and potential impacts of implementation. Citizens should consider all aspects before casting their vote.",
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+            2 -> {
+                // Stats tab
+                Text(
+                    text = "Voting Statistics",
+                    color = Color(0xFFFFD700),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+                
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0A1929).copy(alpha = 0.5f)),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        DetailRow("Yes Votes", yesVotes.toString())
+                        DetailRow("No Votes", noVotes.toString())
+                        DetailRow("Total Participation", "$totalVotes citizens")
+                        DetailRow("Engagement Rate", "23%")
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Text(
+                            text = "Voting Breakdown by State:",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                        
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        DetailRow("New York", "${(20..80).random()}% support")
+                        DetailRow("Texas", "${(20..80).random()}% support")
+                        DetailRow("California", "${(20..80).random()}% support")
+                        DetailRow("Florida", "${(20..80).random()}% support")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DetailRow(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = label,
+            color = Color.LightGray
+        )
+        Text(
+            text = value,
+            color = Color.White,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+fun updateFreedomScore(userId: String, action: String) {
+    // Logic to update freedomScore based on action
+}
+
+fun updatePatriotPoints(userId: String, action: String) {
+    // Logic to update patriotPoints based on action
+}
+
+fun updateFreedomBucks(userId: String, action: String) {
+    // Logic to update freedomBucks based on action
+}
+
+@Composable
+fun HeroActionButton(
+    text: String,
+    onClick: () -> Unit,
+    backgroundColor: Color = Color(0xFF457B9D)
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(72.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            text = text,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun ActionButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = Color(0xFF457B9D)
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
+        modifier = modifier
+            .height(48.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            text = text,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun StateStatsDisplay() {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF2A4A73)),
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "NATIONAL STATS",
+                color = Color(0xFFFFD700),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                StatColumn(label = "Patriots", value = "12,456", icon = "🦅")
+                StatColumn(label = "Laws Proposed", value = "1,893", icon = "📜")
+                StatColumn(label = "Laws Passed", value = "472", icon = "⚖️")
+            }
+        }
+    }
+}
+
+@Composable
+fun StatColumn(label: String, value: String, icon: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = icon,
+            fontSize = 24.sp
+        )
+        
+        Text(
+            text = value,
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
+        
+        Text(
+            text = label,
+            color = Color.LightGray,
+            fontSize = 12.sp
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileScreen2(
+    profile: UserProfile,
+    onBackClick: () -> Unit,
+    onViewAllAchievements: () -> Unit,
+    onViewBipartisanMatch: () -> Unit,
+    onViewElectionHistory: () -> Unit,
+    onViewControversyRadar: () -> Unit,
+    onCustomizeProfile: () -> Unit,
+    onManageTitles: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(Color(0xFF1D3557))
+            .padding(16.dp)
+    ) {
+        // Profile Header
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Avatar
+                Surface(
+                    shape = CircleShape,
+                    color = Color(0xFF1D3557),
+                    modifier = Modifier.size(120.dp)
+                ) {
+                    Text(
+                        text = "🦅",
+                        fontSize = 64.sp,
+                        modifier = Modifier.padding(16.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Username and Rank
+                Text(
+                    text = profile.username,
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = profile.politicalRank,
+                    color = Color(0xFFFFD700),
+                    fontSize = 18.sp
+                )
+
+                // District
+                Text(
+                    text = "District: ${profile.district}",
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Stats Card
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "PATRIOT STATS",
+                    color = Color(0xFFFFD700),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Votes Cast: ${profile.stats.votesCast}", color = Color.White)
+                Text("Laws Passed: ${profile.stats.lawsPassed}", color = Color.White)
+                Text("Streak Days: ${profile.stats.streakDays}", color = Color.White)
+                Text("Freedom Bucks: ${profile.freedomBucks}", color = Color.White)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Badges
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF457B9D)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "BADGES OF HONOR",
+                    color = Color(0xFFFFD700),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    modifier = Modifier.heightIn(max = 200.dp)
+                ) {
+                    items(profile.badges) { badge ->
+                        Card(
+                            modifier = Modifier.padding(4.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFF1D3557))
+                        ) {
+                            Text(
+                                text = badge,
+                                color = Color.White,
+                                modifier = Modifier.padding(8.dp),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // IRS Audit Button (with animation)
+        Button(
+            onClick = { /* TODO */ },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE63946)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("TRIGGER IRS AUDIT 💸")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Add this button before the EditProfile button
+        Button(
+            onClick = { onViewAllAchievements() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            Text("View All Achievements")
+        }
+        
+        // Existing EditProfile button
+        Button(
+            onClick = { /* TODO */ },
+            // ... existing code ...
+        ) {
+            // ... existing code ...
+        }
+        
+        // ... existing code ...
+    }
+}
