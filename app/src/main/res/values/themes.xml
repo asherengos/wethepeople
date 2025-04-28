@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.FreedomFighters" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.WeThePeople" parent="android:Theme.Material.NoActionBar">
+        <!-- Use pure black for the background to avoid the blue screen -->
+        <item name="android:windowBackground">@android:color/black</item>
+        <!-- Black for status and navigation bars for a sleek look -->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <!-- Make sure the splash screen is disabled -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    
+    <!-- Add a custom splash screen theme that is transparent to skip default splash -->
+    <style name="Theme.WeThePeople.SplashScreen" parent="Theme.WeThePeople">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
 </resources>

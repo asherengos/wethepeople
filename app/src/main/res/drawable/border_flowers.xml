@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <path
+        android:strokeColor="#E8C4B0"
+        android:strokeWidth="10"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+
+    <!-- Flowers - top right -->
+    <path
+        android:fillColor="#FFA07A"
+        android:pathData="M195,45m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M195,45m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0" />
+    
+    <path
+        android:fillColor="#FF6347"
+        android:pathData="M180,35m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M180,35m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M205,32m-9,0a9,9 0,1 1,18 0a9,9 0,1 1,-18 0" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M205,32m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+
+    <!-- Leaves -->
+    <path
+        android:fillColor="#228B22"
+        android:pathData="M185,28 c-5,-5 -10,0 -10,5 c5,5 15,0 10,-5 z" />
+    <path
+        android:fillColor="#228B22"
+        android:pathData="M210,45 c5,-5 0,-10 -5,-10 c-5,5 0,15 5,10 z" />
+    <path
+        android:fillColor="#228B22"
+        android:pathData="M190,58 c5,5 10,0 10,-5 c-5,-5 -15,0 -10,5 z" />
+</vector> 

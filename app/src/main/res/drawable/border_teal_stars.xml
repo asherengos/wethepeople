@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Teal border circle -->
+    <path
+        android:strokeColor="#20B2AA"
+        android:strokeWidth="10"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+    
+    <!-- Small star decorations -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M120,10l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M160,16l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M195,40l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M220,80l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M230,120l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M220,160l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M195,200l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M160,224l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M120,230l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,224l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,200l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,160l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,120l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,80l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,40l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,16l1.5,4.5l4.5,0l-3.75,2.75l1.5,4.5l-3.75,-2.75l-3.75,2.75l1.5,-4.5l-3.75,-2.75l4.5,0z" />
+</vector> 

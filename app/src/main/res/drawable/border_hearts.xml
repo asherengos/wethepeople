@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Base pink circle -->
+    <path
+        android:strokeColor="#FFC0CB"
+        android:strokeWidth="10"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+    
+    <!-- Heart - top -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M115,10 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - top right -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M190,40 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - right -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M230,115 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - bottom right -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M190,190 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - bottom -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M115,230 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - bottom left -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M40,190 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - left -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M0,115 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+    
+    <!-- Heart - top left -->
+    <path
+        android:fillColor="#FF69B4"
+        android:pathData="M40,40 c5,-5 10,-5 15,0 c5,5 5,10 0,15 l-10,10 l-10,-10 c-5,-5 -5,-10 0,-15 c5,-5 10,-5 15,0" />
+</vector> 

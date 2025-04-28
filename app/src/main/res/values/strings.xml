@@ -1,4 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Freedom Fighters</string>
+    <string name="app_name">Party of the People</string>
     <string name="default_web_client_id">520409078108-hn1n1nrblsn62eoqhh7f3ekuit90nkg5.apps.googleusercontent.com</string>
+    
+    <!-- Error Messages -->
+    <string name="error_unknown">An unexpected error occurred. Please try again.</string>
+    <string name="error_network">Network error occurred. Please try again.</string>
+    <string name="error_no_internet">No internet connection. Please check your network and try again.</string>
+    <string name="error_timeout">The request timed out. Please try again.</string>
+    <string name="error_server">Server error occurred. Please try again later.</string>
+    <string name="error_unauthorized">Unauthorized access. Please sign in again.</string>
+    <string name="error_forbidden">Access forbidden. You don\'t have permission to perform this action.</string>
+    <string name="error_not_found">The requested resource was not found.</string>
+    
+    <!-- Authentication Errors -->
+    <string name="error_auth">Authentication error occurred.</string>
+    <string name="error_auth_failed">Authentication failed. Please try again.</string>
+    <string name="error_auth_unknown">An unknown authentication error occurred.</string>
+    <string name="error_invalid_email">Invalid email address.</string>
+    <string name="error_wrong_password">Incorrect password.</string>
+    <string name="error_user_not_found">No account found with this email.</string>
+    <string name="error_user_disabled">This account has been disabled.</string>
+    <string name="error_too_many_requests">Too many attempts. Please try again later.</string>
+    <string name="error_operation_not_allowed">This operation is not allowed.</string>
+    
+    <!-- Database Errors -->
+    <string name="error_database">Database error occurred.</string>
+    <string name="error_data_failed">Failed to access data. Please try again.</string>
+    <string name="error_permission_denied">Permission denied to access this data.</string>
+    <string name="error_document_not_found">The requested document was not found.</string>
+    <string name="error_document_exists">The document already exists.</string>
+    
+    <!-- Validation Errors -->
+    <string name="error_field_required">This field is required.</string>
+    <string name="error_invalid_input">Invalid input.</string>
+    
+    <!-- Feature Errors -->
+    <string name="error_feature_unavailable">This feature is currently unavailable.</string>
+    <string name="error_maintenance">This feature is under maintenance.</string>
+    
+    <!-- Success Messages -->
+    <string name="success_profile_updated">Profile updated successfully.</string>
+    <string name="success_password_changed">Password changed successfully.</string>
+    <string name="success_data_saved">Data saved successfully.</string>
+    
+    <!-- Dialog Buttons -->
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_retry">Retry</string>
+    <string name="button_dismiss">Dismiss</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_button_update">Update</string>
+    <string name="dialog_button_add">Add</string>
+
+    <!-- Admin Shop Manager Strings -->
+    <string name="admin_shop_manager_title">Manage Shop Items</string>
+    <string name="content_desc_back">Navigate back</string>
+    <string name="content_desc_add_item">Add new shop item</string>
+    <string name="shop_items_count">Items: %1$d</string> <!-- Example with placeholder -->
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_button_ok">OK</string> <!-- Already exists but useful to see context -->
+    <string name="dialog_title_success">Success</string>
+    <string name="shop_item_price_points">%1$d Patriot Points</string>
+    <string name="shop_item_category">Category: %1$s</string>
+    <string name="shop_item_available">Available</string>
+    <string name="shop_item_unavailable">Unavailable</string>
+    <string name="content_desc_edit">Edit item</string>
+    <string name="shop_item_button_edit">Edit</string>
+    <string name="content_desc_delete">Delete item</string>
+    <string name="shop_item_button_delete">Delete</string>
+    <string name="category_general">General</string> <!-- Assuming this is needed -->
+    <string name="dialog_title_edit_item">Edit Item</string>
+    <string name="dialog_title_add_item">Add Item</string>
+    <string name="dialog_label_name">Item Name</string>
+    <string name="dialog_label_description">Description</string>
+    <string name="dialog_label_price">Price</string>
+    <string name="dialog_label_category">Category</string>
+    <string name="dialog_label_available">Is Available</string>
+
+    <!-- Shop Screen Strings -->
+    <string name="shop_title">Patriot Shop</string>
+
+    <!-- Network Errors -->
+    <string name="error_network_failed">Network error occurred. Please check your connection and try again.</string>
+
+    <!-- Splash screen -->
+    <string name="splash_title">Party of the People</string>
+    <string name="splash_subtitle">Your Voice Matters</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_matches">Matches</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Common actions -->
+    <string name="action_continue">Continue</string>
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    
+    <!-- Profile -->
+    <string name="profile_edit">Edit Profile</string>
+    <string name="profile_save">Save Changes</string>
+    <string name="profile_picture">Profile Picture</string>
+    
+    <!-- Authentication -->
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_sign_up">Sign Up</string>
+    <string name="auth_sign_out">Sign Out</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Password</string>
 </resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Main hat body -->
+    <path
+        android:fillColor="#8B4513"
+        android:pathData="M85,100 l70,0 c5,0 15,5 15,15 l-8,25 l-84,0 l-8,-25 c0,-10 10,-15 15,-15 z" />
+    
+    <!-- Hat top -->
+    <path
+        android:fillColor="#A0522D"
+        android:pathData="M120,85 a35,15 0 1,0 0.1,0 z" />
+    
+    <!-- Hat brim -->
+    <path
+        android:fillColor="#8B4513"
+        android:pathData="M70,115 l100,0 l-5,10 l-90,0 z" />
+    
+    <!-- Hat band -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M85,105 l70,0 l0,5 l-70,0 z" />
+    
+    <!-- Hat buckle -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M115,105 l10,0 l0,5 l-10,0 z" />
+</vector> 

@@ -1,0 +1,29 @@
+# Debugging Workflow (7 Steps)
+
+1. **Gather Info**
+   - Capture logs, error messages, stack traces.
+   - Run the app in debug mode to inspect variables.
+
+2. **Review Project Context**
+   - Check recent edits or interactions.
+   - Revisit architecture and global rules documents.
+
+3. **Assess Potential Causes**
+   - Write out likely causes of the issue.
+   - Note evidence *for* and *against* each.
+
+4. **Design & Evaluate Fixes**
+   - List at least 2 possible fixes.
+   - Evaluate based on simplicity, clarity, and impact.
+
+5. **Implement Fix**
+   - Code the selected fix clearly.
+   - Add comments if needed.
+
+6. **Test & Build**
+   - Confirm the issue is resolved.
+   - Rebuild and run tests.
+
+7. **Communicate**
+   - Explain what changed and why before moving forward.
+

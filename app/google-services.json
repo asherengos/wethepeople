@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "954483151443",
-    "project_id": "freedom-fighters-cd014",
-    "storage_bucket": "freedom-fighters-cd014.firebasestorage.app"
+    "project_number": "752109706664",
+    "project_id": "we-the-people-efa51",
+    "storage_bucket": "we-the-people-efa51.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:954483151443:android:a18de05e7dfad3bce86ca6",
+        "mobilesdk_app_id": "1:752109706664:android:5a0e27f9464f25f15ed19d",
         "android_client_info": {
-          "package_name": "com.example.partyofthepeople"
+          "package_name": "com.example.wethepeople"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDHVrBqGEXxcmvHgj_me5vMzJCvNSbAnOU"
+          "current_key": "AIzaSyAGoUndRgaQv6SkTimJNITdiSupezHLEhQ"
         }
       ],
       "services": {
@@ -26,4 +26,4 @@
     }
   ],
   "configuration_version": "1"
-}
+} 

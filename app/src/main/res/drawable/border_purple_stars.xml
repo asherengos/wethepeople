@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Base purple circle -->
+    <path
+        android:strokeColor="#800080"
+        android:strokeWidth="10"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+    
+    <!-- Gold star decorations -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M120,10l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M165,20l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M200,50l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M220,100l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M220,140l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M200,190l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M165,220l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M120,230l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M75,220l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M40,190l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M20,140l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M20,100l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M40,50l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M75,20l3,9l9,0l-7,5l3,9l-8,-6l-8,6l3,-9l-7,-5l9,0z" />
+</vector> 

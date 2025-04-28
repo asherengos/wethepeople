@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,30C70,30 45,55 45,85C45,115 70,140 100,140C130,140 155,115 155,85C155,55 130,30 100,30ZM100,35C127.5,35 150,57.5 150,85C150,112.5 127.5,135 100,135C72.5,135 50,112.5 50,85C50,57.5 72.5,35 100,35Z"/>
+    
+    <!-- Wings -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,80C20,90 10,110 10,130C10,150 25,165 45,165C65,165 80,150 80,130C80,110 60,90 40,80ZM160,80C180,90 190,110 190,130C190,150 175,165 155,165C135,165 120,150 120,130C120,110 140,90 160,80Z"/>
+    
+    <!-- Beak -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M95,75L105,75L100,85Z"/>
+</vector> 

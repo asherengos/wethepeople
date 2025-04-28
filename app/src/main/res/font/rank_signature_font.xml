@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:font="@font/rank_signature"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/rank_signature"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <!-- Add bold/italic variations if available -->
+</font-family> 

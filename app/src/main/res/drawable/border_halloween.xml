@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Base orange circle -->
+    <path
+        android:strokeColor="#FF6600"
+        android:strokeWidth="12"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+    
+    <!-- Jack-o-lantern on top -->
+    <path
+        android:fillColor="#FF6600"
+        android:strokeColor="#000000"
+        android:strokeWidth="2"
+        android:pathData="M120,10 c-10,0 -15,5 -15,15 c0,10 10,15 15,15 c5,0 15,-5 15,-15 c0,-10 -5,-15 -15,-15z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M115,18 l3,3 l4,-3 l-2,6 l-3,-2z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M113,25 c0,0 5,5 14,0 c-5,8 -9,8 -14,0z" />
+    
+    <!-- Jack-o-lantern on right -->
+    <path
+        android:fillColor="#FF6600"
+        android:strokeColor="#000000"
+        android:strokeWidth="2"
+        android:pathData="M230,120 c0,-10 -5,-15 -15,-15 c-10,0 -15,10 -15,15 c0,5 5,15 15,15 c10,0 15,-5 15,-15z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M218,113 l3,3 l4,-3 l-2,6 l-3,-2z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M216,120 c0,0 5,5 14,0 c-5,8 -9,8 -14,0z" />
+    
+    <!-- Jack-o-lantern on bottom -->
+    <path
+        android:fillColor="#FF6600"
+        android:strokeColor="#000000"
+        android:strokeWidth="2"
+        android:pathData="M120,230 c10,0 15,-5 15,-15 c0,-10 -10,-15 -15,-15 c-5,0 -15,5 -15,15 c0,10 5,15 15,15z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M115,218 l3,3 l4,-3 l-2,6 l-3,-2z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M113,225 c0,0 5,5 14,0 c-5,8 -9,8 -14,0z" />
+</vector> 

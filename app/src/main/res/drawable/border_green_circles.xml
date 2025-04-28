@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    <!-- Base green circle -->
+    <path
+        android:strokeColor="#228B22"
+        android:strokeWidth="10"
+        android:fillColor="#00000000"
+        android:pathData="M120,120m-110,0a110,110 0,1 1,220 0a110,110 0,1 1,-220 0" />
+    
+    <!-- Orange dot decorations -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M120,10m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M165,20m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M205,55m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M230,120m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M205,185m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M165,220m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M120,230m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M75,220m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M35,185m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M10,120m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M35,55m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M75,20m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+</vector> 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "752109706664",
+    "project_id": "we-the-people-efa51",
+    "storage_bucket": "we-the-people-efa51.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752109706664:android:5a0e27f9464f25f15ed19d",
+        "android_client_info": {
+          "package_name": "com.example.wethepeople"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGoUndRgaQv6SkTimJNITdiSupezHLEhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

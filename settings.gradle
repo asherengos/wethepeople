@@ -1,8 +1,16 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            // Remove Hilt plugin resolution
+            // if (requested.id.id == 'dagger.hilt.android.plugin') {
+            //     useModule("com.google.dagger:hilt-android-gradle-plugin:2.50")
+            // }
+        }
     }
 }
 
@@ -11,8 +19,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
-rootProject.name = "PartyOfThePeople"
+rootProject.name = "Party of the People"
 include ':app' 

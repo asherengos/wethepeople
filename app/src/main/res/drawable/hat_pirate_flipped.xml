@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/hat_pirate"
+            android:gravity="center"
+            android:scaleX="-1" />
+    </item>
+</layer-list> 
